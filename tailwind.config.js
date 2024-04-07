@@ -9,6 +9,11 @@ module.exports = {
       "schabo": "Schabo",
       "e-ukraine": "e-Ukraine",
     },
+    screens: {
+      "tablet": "768px",
+      "laptop": "1024px",
+      "desktop": "1920px",
+    },
     extend: {},
   },
   plugins: [],
