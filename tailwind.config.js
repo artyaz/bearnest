@@ -5,6 +5,10 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      "schabo": "Schabo",
+      "e-ukraine": "e-Ukraine",
+    },
     extend: {},
   },
   plugins: [],
