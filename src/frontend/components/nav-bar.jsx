@@ -49,7 +49,7 @@ export function NavigationBar() {
       <NavigationMenuList className="m-5 laptop:space-x-[2%]">
         <NavigationMenuItem class="hidden laptop:block">
           <Image
-            src="/images/bearnest-logo.png"
+            src="/images/bearnest-logo-desktop.svg"
             alt="Bearnest Logo"
             width={80}
             height={50}
