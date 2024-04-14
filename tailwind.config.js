@@ -13,6 +13,10 @@ module.exports = {
       center: true,
       padding: "2rem",
     },
+    fontFamily: {
+      "schabo": "Schabo",
+      "e-ukraine": "e-Ukraine",
+    },
     screens: {
       tablet: "768px",
       laptop: "1024px",
