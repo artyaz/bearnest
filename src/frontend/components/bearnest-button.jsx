@@ -5,7 +5,7 @@ import "material-icons/iconfont/material-icons.css";
 const buttonVariants = {
   white:
     "border border-gray-200 bg-white hover:bg-accent text-black p-2 min-w-[40px] ",
-  black: "bg-black text-white border-gray-900 min-w-[40px] ",
+  black: "border bg-black text-white border-gray-900 min-w-[40px] p-2 ",
   default: "bg-gray-200 text-black border-gray-400 min-w-[40px] ",
 };
 

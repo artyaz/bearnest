@@ -92,7 +92,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("../../public/fonts/e-Ukraine/e-Ukraine-Regular.otf") format("opentype");
+    src: url("../../public/fonts/e-Ukraine/e-Ukraine-Regular.otf")
+      format("opentype");
   }
 
   @font-face {
@@ -100,7 +101,8 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("../../public/fonts/e-Ukraine/e-Ukraine-Medium.otf") format("opentype");
+    src: url("../../public/fonts/e-Ukraine/e-Ukraine-Medium.otf")
+      format("opentype");
   }
 
   @font-face {
@@ -108,6 +110,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("../../public/fonts/e-Ukraine/e-Ukraine-Bold.otf") format("opentype");
+    src: url("../../public/fonts/e-Ukraine/e-Ukraine-Bold.otf")
+      format("opentype");
   }
 }
