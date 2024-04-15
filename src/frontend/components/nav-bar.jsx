@@ -46,7 +46,7 @@ const components = [
 export function NavigationBar() {
   return (
     <NavigationMenu class="w-full">
-      <NavigationMenuList className="m-5 laptop:space-x-[2%]">
+      <NavigationMenuList className=" laptop:space-x-[2%]">
         <NavigationMenuItem class="hidden laptop:block">
           <Image
             src="/images/bearnest-logo-desktop.svg"
