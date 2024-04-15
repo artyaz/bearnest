@@ -112,7 +112,6 @@ export function NavigationBar() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <VerticalSpacer height="20" />
         <div class="flex space-x-2">
           <div class="laptop:hidden">
             <BNavigationDropDown />
