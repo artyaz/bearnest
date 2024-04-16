@@ -37,7 +37,7 @@ export function BButton({
 
   return (
     <Button className={buttonClass}>
-      {icon && <span class="material-icons-round !text-[20px]">{icon}</span>}
+      {icon && <span class="material-icons-round">{icon}</span>}
 
       {text ? <span>{text}</span> : children || <Fragment />}
     </Button>

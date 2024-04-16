@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
         <div class="rounded-bl-2xl rounded-br-2xl bg-white p-3">
           <NavigationBar class="bg-white" />
         </div>
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );
