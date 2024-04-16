@@ -30,10 +30,10 @@ export function ProductCard({ id }) {
     return <div>Loading...</div>;
   }
 
-  //cutting description if > 50 characters
+  //cutting description if > 45 characters
   const truncatedDescription =
-    item.description.length > 50
-      ? item.description.substring(0, 50) + "..."
+    item.description.length > 45
+      ? item.description.substring(0, 45) + "..."
       : item.description;
 
   return (

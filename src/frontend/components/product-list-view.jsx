@@ -3,6 +3,13 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
 import { ProductCard } from "./product-card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function ProductListView({
   title,
@@ -44,14 +51,35 @@ export default function ProductListView({
   }, [textFilter, priceFilter, materialsFilter, categoryFilter]);
 
   return (
-    <div class="m-5 space-y-3">
-      {title && <h1 class="font-e-ukraine text-3xl font-bold">{title}</h1>}
-      <div class="flex space-x-5">
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          ids.map((id) => <ProductCard id={id.id} />)
-        )}
+    <div class="mt-10 space-y-5">
+      {title && (
+        <h1 class="ml-20 font-e-ukraine text-3xl font-bold">{title}</h1>
+      )}
+      <div class="flex w-full justify-center">
+        <div class="w-[90%]">
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                ids.map((id) => (
+                  <CarouselItem key={id} class="my-1 ml-5 basis-1/3">
+                    <div className="">
+                      <ProductCard id={id.id} />
+                    </div>
+                  </CarouselItem>
+                ))
+              )}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
       </div>
     </div>
   );
