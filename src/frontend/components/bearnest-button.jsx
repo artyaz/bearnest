@@ -3,34 +3,43 @@ import { Fragment } from "react";
 import "material-icons/iconfont/material-icons.css";
 
 const buttonVariants = {
+  black: "bg-zinc-800 text-zinc-100 hover:bg-zinc-600 active:bg-zinc-900 ",
   white:
-    "border border-gray-200 bg-white hover:bg-accent text-black p-2 min-w-[40px] ",
-  black: "border bg-black text-white border-gray-900 min-w-[40px] p-2 ",
-  default: "bg-gray-200 text-black border-gray-400 min-w-[40px] ",
+    "border border-zinc-300 bg-neutral-50 text-zinc-900 hover:border-none hover:bg-zinc-200 active:bg-zinc-900 active:text-zinc-100 ",
+  orange:
+    "bg-orange-500 text-zinc-100 hover:bg-orange-400 active:bg-orange-600 ",
 };
 
-const buttonType = {
-  rounded: "rounded-full ",
-  default: "",
+const buttonTypes = {
+  rounded: "rounded-full hover:rounded-lg active:rounded-lg ",
+  default: "rounded-lg ",
 };
 
 export function BButton({
-  name,
+  text,
   icon,
-  type,
+  type = "default",
   additionalStyles,
-  variant = "default",
+  variant = "black",
   children,
 }) {
-  let buttonClass = buttonVariants[variant] || buttonVariants.default;
-  buttonClass += type && buttonType[type] ? buttonType[type] : "";
-  buttonClass += additionalStyles ? additionalStyles : "";
+  const sharedStyles = "font-e-ukraine font-bold ";
+
+  let buttonClass =
+    buttonVariants[variant] +
+    buttonTypes[type] +
+    sharedStyles +
+    additionalStyles;
+
+  if (text && icon) {
+    buttonClass += " flex gap-2";
+  }
 
   return (
     <Button className={buttonClass}>
       {icon && <span class="material-icons-round !text-[20px]">{icon}</span>}
 
-      {name ? <span>{name}</span> : children || <Fragment />}
+      {text ? <span>{text}</span> : children || <Fragment />}
     </Button>
   );
 }

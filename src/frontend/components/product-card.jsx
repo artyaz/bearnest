@@ -55,7 +55,7 @@ export function ProductCard({ id }) {
       </div>
       <div class="flex items-center justify-between">
         <h1 class="font-e-ukraine text-sm font-bold">${item.price}</h1>
-        <BButton variant="black" type="rounded" icon="arrow_outward" />
+        <BButton type="rounded" icon="arrow_outward" additionalStyles="min-w-[40px] p-2" />
       </div>
     </div>
   );
