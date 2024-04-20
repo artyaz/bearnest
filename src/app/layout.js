@@ -1,5 +1,6 @@
 import "./global.css";
 import { NavigationBar } from "@/frontend/components/nav-bar";
+import Footer from "@/frontend/components/footer";
 
 export default function RootLayout({ children }) {
   return (
@@ -9,6 +10,7 @@ export default function RootLayout({ children }) {
           <NavigationBar class="bg-white" />
         </div>
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
