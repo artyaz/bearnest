@@ -51,12 +51,12 @@ export default function ProductListView({
   }, [textFilter, priceFilter, materialsFilter, categoryFilter]);
 
   return (
-    <div class="mt-10 space-y-5">
+    <div class="my-10 space-y-5">
       {title && (
         <h1 class="ml-20 font-e-ukraine text-3xl font-bold">{title}</h1>
       )}
       <div class="flex w-full justify-center">
-        <div class="w-[90%]">
+        <div class="w-[70%] tablet:w-[90%]">
           <Carousel
             opts={{
               align: "start",
@@ -68,7 +68,7 @@ export default function ProductListView({
                 <p>Loading...</p>
               ) : (
                 ids.map((id) => (
-                  <CarouselItem key={id} class="my-1 ml-5 basis-1/3">
+                  <CarouselItem key={id} class="my-1 ml-5">
                     <div className="">
                       <ProductCard id={id.id} />
                     </div>

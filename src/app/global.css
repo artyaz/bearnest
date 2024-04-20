@@ -87,6 +87,14 @@
       url("../../public/fonts/Schabo/Schabo.otf") format("opentype");
   }
 
+  @layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
   @font-face {
     font-family: "e-Ukraine";
     font-style: normal;

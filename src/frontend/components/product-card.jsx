@@ -37,14 +37,15 @@ export function ProductCard({ id }) {
       : item.description;
 
   return (
-    <div class=" w-60 space-y-5 rounded-2xl bg-white p-5 outline-neutral-200 hover:outline hover:outline-1">
+    <a href={"products/" + id}>
+    <div class=" w-72 tablet:w-60 space-y-5 rounded-2xl bg-white p-5 outline-neutral-200 hover:outline hover:outline-1">
       <div class="space-y-4">
         <Image
           src={item.images[0]}
           alt="Bearnest Logo"
           width={120}
           height={80}
-          class="mx-auto h-36 w-52 rounded-xl object-cover"
+          class="mx-auto h-36 w-64 rounded-xl object-cover"
         />
         <div class="space-y-1">
           <h1 class="font-e-ukraine text-sm font-bold">{item.title}</h1>
@@ -58,5 +59,6 @@ export function ProductCard({ id }) {
         <BButton type="rounded" icon="arrow_outward" additionalStyles="min-w-[40px] p-2" />
       </div>
     </div>
+    </a>
   );
 }

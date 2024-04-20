@@ -6,6 +6,9 @@ export default function Home() {
     <>
       <CallToAction />
       <ProductListView title="Chairs" />
+      <ProductListView title="Tables" />
+      <ProductListView title="Outdoor" />
+      <ProductListView title="Sofas" />
     </>
   );
 }

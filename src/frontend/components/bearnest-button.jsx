@@ -23,7 +23,7 @@ export function BButton({
   variant = "black",
   children,
 }) {
-  const sharedStyles = "font-e-ukraine font-bold ";
+  const sharedStyles = "font-e-ukraine font-regular ";
 
   let buttonClass =
     buttonVariants[variant] +
