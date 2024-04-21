@@ -10,16 +10,30 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 import { BButton } from "@/frontend/components/bearnest-button";
 import { AmountInput } from "@/frontend/components/amount-input";
-import { Separator } from "@/components/ui/separator"
-
+import { Separator } from "@/components/ui/separator";
 
 export default function Product({ params }) {
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const id = params.id;
-  //console.log(item.dimensions.width);
 
   useEffect(() => {
     async function fetchData() {
@@ -41,6 +55,9 @@ export default function Product({ params }) {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const dim = item.dimensions;
+  console.log(dim);
 
   return (
     <>
@@ -83,7 +100,7 @@ export default function Product({ params }) {
                 <BButton icon="add_shopping_cart" variant="white">
                   Add to cart
                 </BButton>
-                
+
                 <BButton icon="favorite" variant="white" />
               </div>
               <BButton additionalStyles="w-full">Buy it now</BButton>
@@ -91,15 +108,51 @@ export default function Product({ params }) {
           </div>
         </div>
       </div>
-      <div class='flex p-20 space-x-5'>
-        <div class='w-[50%] space-y-2'>
-          <h1 className="text-lg font-e-ukraine font-bold">Description</h1>
-          <p class='font-e-ukraine text-xs font-light text-gray-600'>{item.description}</p>
+      <div class="flex space-x-5 p-20">
+        <div class="w-[50%] space-y-8">
+          <h1 className="font-e-ukraine text-lg font-bold">Description</h1>
+          <p class="font-e-ukraine text-xs font-light text-gray-600">
+            {item.description}
+          </p>
         </div>
         <Separator orientation="vertical" />
-        <div class='w-[50%] space-y-2'>
-          <h1 className="text-lg font-e-ukraine font-bold">Dimensions</h1>
+        <div class="w-[50%] space-y-2">
+          <h1 className="font-e-ukraine text-lg font-bold">Dimensions</h1>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium">Width</TableCell>
+                <TableCell className="text-right">
+                  {item.dimensions.width}mm
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Height</TableCell>
+                <TableCell className="text-right">
+                  {item.dimensions.height}mm
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Depth</TableCell>
+                <TableCell className="text-right">
+                  {item.dimensions.depth}mm
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
+      </div>
+      <div class='px-20 pb-5'>
+      <Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Materials</AccordionTrigger>
+    <AccordionContent>
+    {item.materials.map((material, index) => (
+  index === item.materials.length - 1 ? material : material + ", "
+))}
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
       </div>
     </>
   );

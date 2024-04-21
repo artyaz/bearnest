@@ -48,6 +48,7 @@ export function NavigationBar() {
     <NavigationMenu class="w-full">
       <NavigationMenuList className=" laptop:space-x-[2%]">
         <NavigationMenuItem class="hidden laptop:block">
+          <a href="/">
           <Image
             src="/images/bearnest-logo-desktop.svg"
             alt="Bearnest Logo"
@@ -55,6 +56,7 @@ export function NavigationBar() {
             height={50}
             class="min-w-20"
           />
+          </a>
         </NavigationMenuItem>
         <NavigationMenuItem class="block laptop:hidden">
           <Image
