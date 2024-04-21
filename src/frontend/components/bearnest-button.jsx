@@ -5,7 +5,7 @@ import "material-icons/iconfont/material-icons.css";
 const buttonVariants = {
   black: "bg-zinc-800 text-zinc-100 hover:bg-zinc-600 active:bg-zinc-900 ",
   white:
-    "border border-zinc-300 bg-neutral-50 text-zinc-900 hover:border-none hover:bg-zinc-200 active:bg-zinc-900 active:text-zinc-100 ",
+    "outline outline-zinc-300 outline-1 bg-neutral-50 text-zinc-900 hover:border-none hover:bg-zinc-200 active:bg-zinc-900 active:text-zinc-100 ",
   orange:
     "bg-orange-500 text-zinc-100 hover:bg-orange-400 active:bg-orange-600 ",
 };
