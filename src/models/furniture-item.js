@@ -9,6 +9,8 @@ class FurnitureItem {
     this.dimensions = data.dimensions;
     this.materials = data.meterials?.materials;
     this.image_count = data.image_count;
+    this.colors = data.colors?.colors;
+    this.variants = data.variants?.variants;
     this.images = [];
   }
 

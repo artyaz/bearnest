@@ -29,6 +29,7 @@ import {
 import { BButton } from "@/frontend/components/bearnest-button";
 import { AmountInput } from "@/frontend/components/amount-input";
 import { Separator } from "@/components/ui/separator";
+import ItemSelector from "@/frontend/components/item-selector";
 
 export default function Product({ params }) {
   const [item, setItem] = useState(null);
@@ -89,13 +90,16 @@ export default function Product({ params }) {
               <CarouselNext />
             </Carousel>
           </div>
-          <div class="ml-20 space-y-3">
+          <div class="ml-20 space-y-3 w-72">
             <h1 class="font-e-ukraine text-xl font-bold">{item.title}</h1>
             <h1 class="font-e-ukraine font-bold">${item.price}</h1>
             <p class="font-e-ukraine text-sm font-normal">Select size</p>
+            <ItemSelector options={item.variants} type={'text'}/>
             <p class="font-e-ukraine text-sm font-normal">Select color</p>
+            <ItemSelector options={item.colors} type={'color'} />
+
             <div class="space-y-2">
-              <div class="flex space-x-2">
+              <div class="flex justify-between">
                 <AmountInput />
                 <BButton icon="add_shopping_cart" variant="white">
                   Add to cart
