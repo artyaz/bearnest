@@ -48,12 +48,14 @@ export default function Footer() {
     <footer className="flex flex-col gap-12 px-4 pb-6 pt-10 font-e-ukraine font-medium tablet:px-8 desktop:px-40">
       <section className="flex flex-col gap-24 rounded-2xl bg-white bg-[url('../../public/images/bear-paw.svg')] bg-contain bg-center bg-no-repeat px-6 py-8 tablet:px-10 laptop:bg-auto">
         <div className="grid gap-8 text-[12px] leading-tight tablet:grid-cols-[1fr_auto] desktop:grid-cols-[repeat(3,auto)]">
-          <Image
-            src="/images/bearnest-logo-desktop.svg"
-            alt="Bearnest Logo"
-            width={129}
-            height={40}
-          />
+          <a href="/">
+            <Image
+              src="/images/bearnest-logo-desktop.svg"
+              alt="Bearnest Logo"
+              width={129}
+              height={40}
+            />
+          </a>
 
           <div className="flex flex-col items-center gap-1 tablet:items-end desktop:col-start-3">
             <BButton
