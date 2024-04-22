@@ -33,8 +33,6 @@ export default function Footer() {
 
   const links = linkSectionData.map((data, index) => (
     <div key={index} className="flex flex-1 flex-col gap-4">
-      {" "}
-      {/* Key added here */}
       <h3 className="leading-[1.25]">{data.title}</h3>
       <ul className="flex flex-col gap-2 text-[16px] leading-[1.4]">
         {data.links.map((link, subIndex) => (
