@@ -27,7 +27,7 @@ export default function ProductListView({
 
       let query = supabase.from("products").select("id");
 
-      const filter = `name.imatch.${textFilter}%,description.imatch.${textFilter}`;
+      const filter = `name.imatch.${textFilter},description.imatch.${textFilter}`;
       if (textFilter) {
         query = query.or(filter);
       }

@@ -17,6 +17,8 @@ import { Input } from "@/components/ui/input";
 import { BButton } from "./bearnest-button";
 import { VerticalSpacer } from "./vertical-spacer";
 import { BNavigationDropDown } from "./bearnest-dropdown-menu";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const components = [
   {
@@ -44,18 +46,26 @@ const components = [
 ];
 
 export function NavigationBar() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formattedTerm = encodeURIComponent(searchTerm);
+    const searchUrl = `/search/title=${formattedTerm}`;
+    window.location.href = searchUrl;
+  };
+
   return (
     <NavigationMenu class="w-full">
       <NavigationMenuList className=" laptop:space-x-[2%]">
         <NavigationMenuItem class="hidden laptop:block">
           <a href="/">
-          <Image
-            src="/images/bearnest-logo-desktop.svg"
-            alt="Bearnest Logo"
-            width={80}
-            height={50}
-            class="min-w-20"
-          />
+            <Image
+              src="/images/bearnest-logo-desktop.svg"
+              alt="Bearnest Logo"
+              width={80}
+              height={50}
+              class="min-w-20"
+            />
           </a>
         </NavigationMenuItem>
         <NavigationMenuItem class="block laptop:hidden">
@@ -100,12 +110,22 @@ export function NavigationBar() {
           </NavigationMenuItem>
         </div>
         <NavigationMenuItem class="w-[100%] laptop:w-[40%]">
-          <Input
-            type="search"
-            placeholder="Search"
-            icon="search"
-            class="w-[100%]"
-          />
+          <form onSubmit={handleSubmit}>
+            <Input
+              type="search"
+              name="text"
+              placeholder="Search"
+              icon="search"
+              className="w-[100%]" // Use className instead of class
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              autoComplete="off"
+            />
+            <button type="submit" hidden>
+              Search
+            </button>{" "}
+            {/* Hidden submit button for accessibility */}
+          </form>
         </NavigationMenuItem>
         <NavigationMenuItem class="hidden laptop:block">
           <Link href="/docs" legacyBehavior passHref>

@@ -58,7 +58,6 @@ export default function Product({ params }) {
   }
 
   const dim = item.dimensions;
-  console.log(dim);
 
   return (
     <>
@@ -90,18 +89,18 @@ export default function Product({ params }) {
               <CarouselNext />
             </Carousel>
           </div>
-          <div class="ml-20 space-y-3 w-72">
+          <div class="ml-20 space-y-3 w-[30%]">
             <h1 class="font-e-ukraine text-xl font-bold">{item.title}</h1>
             <h1 class="font-e-ukraine font-bold">${item.price}</h1>
-            <p class="font-e-ukraine text-sm font-normal">Select size</p>
+            <p class="font-e-ukraine text-sm font-normal">Select variant</p>
             <ItemSelector options={item.variants} type={'text'}/>
             <p class="font-e-ukraine text-sm font-normal">Select color</p>
             <ItemSelector options={item.colors} type={'color'} />
 
             <div class="space-y-2">
-              <div class="flex justify-between">
+              <div class="flex space-x-2">
                 <AmountInput />
-                <BButton icon="add_shopping_cart" variant="white">
+                <BButton icon="add_shopping_cart" variant="white" additionalStyles='w-full'>
                   Add to cart
                 </BButton>
 

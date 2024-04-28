@@ -11,6 +11,7 @@ class FurnitureItem {
     this.image_count = data.image_count;
     this.colors = data.colors?.colors;
     this.variants = data.variants?.variants;
+    this.category = data.category;
     this.images = [];
   }
 
@@ -46,6 +47,17 @@ class FurnitureItem {
     }
 
     return new FurnitureItem(data);
+  }
+  static async getUniqueRows(column) {
+    const { data, error } = await supabase.from(column).select("*");
+
+    if (error) throw error;
+
+    if (!data) {
+      return undefined;
+    }
+
+    return data;
   }
 }
 
