@@ -8,7 +8,6 @@ import {
   SelectLabel,
   SelectGroup,
 } from "@/components/ui/select";
-import { Slider } from "@nextui-org/slider";
 import { Input } from "@/components/ui/input";
 
 export default function SearchFilters({ filter_data, onFilterChange }) {
