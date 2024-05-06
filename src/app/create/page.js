@@ -97,19 +97,19 @@ export default function CreateEntry() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "sdgg",
-      description: "dssdg",
+      name: "",
+      description: "",
       images: [],
       materials: [],
       materials: [],
       colors: [],
       variants: [],
-      price: "453",
-      weight: "453",
-      height: "435",
-      depth: "435",
-      width: "3432",
-      stock: "343",
+      price: "",
+      weight: "",
+      height: "",
+      depth: "",
+      width: "",
+      stock: "",
     },
   });
 
