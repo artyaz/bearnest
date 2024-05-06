@@ -1,4 +1,5 @@
 import { supabase } from "@/utils/supabase";
+import { decode } from 'base64-arraybuffer'
 
 class FurnitureItem {
   constructor(data) {
@@ -46,8 +47,85 @@ class FurnitureItem {
       return undefined;
     }
 
+    console.log(data);
+
     return new FurnitureItem(data);
   }
+
+  static async uploadImages(images, id) {
+    for (let index = 0; index < images.length; index++) {
+      const base64String = images[index];
+      console.log(`Uploading image ${index + 1}`);
+
+      // Check and remove the data URL schema if present
+      const base64Data = base64String.split(';base64,').pop();
+      
+      try {
+        const decodedImage = decode(base64Data);
+
+        const { data, error } = await supabase.storage
+          .from('product_images')
+          .upload(`${id}/${index + 1}.jpeg`, decodedImage, {
+            contentType: 'image/jpeg',
+            upsert: false
+          });
+
+        if (error) {
+          console.error('Error uploading image:', error);
+          return;  // Exit if there is an error
+        }
+        console.log('Image uploaded successfully:', data);
+      } catch (error) {
+        console.error('Error decoding image:', error);
+      }
+    }
+  }
+
+  
+
+  static async createEntry(values) {
+    // Transform input data to match the expected database schema
+    const transformedValues = { // Assuming you need the current timestamp
+        name: values.name,
+        description: values.description,
+        price: parseFloat(values.price),
+        meterials: {
+            materials: values.materials.map(material => material.text)  // Extract the text as material names
+        },
+        category: values.category,
+        image_count: values.images.length,
+        stock: parseInt(values.stock),
+        weight: parseFloat(values.weight),
+        dimensions: {
+            depth: parseInt(values.depth),
+            width: parseInt(values.width),
+            height: parseInt(values.height)
+        },
+        colors: {
+            colors: values.colors.map(color => color.text)  // Extract the text as color names
+        },
+        variants: {
+            variants: values.variants.map(variant => variant.text)  // Extract the text for variants
+        }
+    };
+
+    // Database insert operation
+    
+    const { data, error } = await supabase
+        .from('products')
+        .insert([
+            transformedValues
+        ])
+        .select();
+
+    if (error) {
+        console.error('Error:', error);
+        return;  // Handle the error appropriately
+    }
+    this.uploadImages(values.images, data[0].id)
+    console.log('Data inserted:', data);
+}
+
   static async getUniqueRows(column) {
     const { data, error } = await supabase.from(column).select("*");
 

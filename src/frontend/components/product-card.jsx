@@ -31,10 +31,9 @@ export function ProductCard({ id }) {
   }
 
   //cutting description if > 45 characters
-  const truncatedDescription =
-    item.description.length > 45
-      ? item.description.substring(0, 45) + "..."
-      : item.description;
+  const truncatedDescription = item.description && item.description.length > 45
+  ? item.description.substring(0, 45) + "..."
+  : item.description || "";
 
   return (
     <a href={"../products/" + id}>
