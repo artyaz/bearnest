@@ -137,6 +137,42 @@ class FurnitureItem {
 
     return data;
   }
+
+  static async fetchLimitedData(){
+    const { data, error } = await supabase
+        .from("products")
+        .select("id, name, stock, price")
+  
+      if (error) throw error;
+  
+      if (!data) {
+        return undefined;
+      }
+  
+      console.log(data);
+  
+      return data;
+  }
+
+  static async deleteEntry(id){
+    const { data, error } = await supabase
+        .from("products")
+        .delete()
+        .eq("id", id);
+
+  
+      if (error) throw error;
+  
+      if (!data) {
+        return undefined;
+      }
+  
+      console.log(data);
+  
+      return data;
+  }
 }
+
+
 
 export default FurnitureItem;
