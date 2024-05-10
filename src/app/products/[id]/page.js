@@ -25,6 +25,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 import { BButton } from "@/frontend/components/bearnest-button";
 import { AmountInput } from "@/frontend/components/amount-input";
@@ -32,6 +33,9 @@ import { Separator } from "@/components/ui/separator";
 import ItemSelector from "@/frontend/components/item-selector";
 
 export default function Product({ params }) {
+  const [selectedAmount, setSelectedAmount] = useState(1);
+const [selectedVariant, setSelectedVariant] = useState(null);
+const [selectedColor, setSelectedColor] = useState(null);
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const id = params.id;
@@ -58,6 +62,28 @@ export default function Product({ params }) {
   }
 
   const dim = item.dimensions;
+
+  const addToCart = (product) => {
+    // Retrieve the cart from localStorage, or initialize an empty array if not present
+    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+  
+    // Check if the exact product variant already exists in the cart
+    const existingProductIndex = cart.findIndex(item =>
+      item.id === product.id && item.variant === product.variant && item.color === product.color
+    );
+  
+    if (existingProductIndex !== -1) {
+      // Exact product variant exists, update the quantity
+      cart[existingProductIndex].quantity += product.quantity;
+    } else {
+      // Exact product variant does not exist, add to cart as a new entry
+      cart.push(product);
+    }
+  
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(cart);
+  };
 
   return (
     <>
@@ -89,24 +115,44 @@ export default function Product({ params }) {
               <CarouselNext />
             </Carousel>
           </div>
-          <div class="ml-20 space-y-3 w-[30%]">
+          <div class="ml-20 w-[30%] space-y-3">
             <h1 class="font-e-ukraine text-xl font-bold">{item.title}</h1>
             <h1 class="font-e-ukraine font-bold">${item.price}</h1>
             <p class="font-e-ukraine text-sm font-normal">Select variant</p>
-            <ItemSelector options={item.variants} type={'text'}/>
+            <ItemSelector options={item.variants} type="text" onChange={setSelectedVariant} />
             <p class="font-e-ukraine text-sm font-normal">Select color</p>
-            <ItemSelector options={item.colors} type={'color'} />
+            <ItemSelector options={item.colors} type="color" onChange={setSelectedColor} />
 
             <div class="space-y-2">
               <div class="flex space-x-2">
-                <AmountInput />
-                <BButton icon="add_shopping_cart" variant="white" additionalStyles='w-full'>
-                  Add to cart
-                </BButton>
+              <AmountInput value={selectedAmount} onChange={setSelectedAmount} />
 
-                <BButton icon="favorite" variant="white" />
+                <Button
+                  className="w-full rounded-lg"
+                  variant="outline"
+                  onClick={() => {
+                    addToCart({
+                      id: item.id,
+                      image: item.images[0],
+                      totalPrice: item.price * selectedAmount,
+                      pricePerItem: item.price,
+                      name: item.title,
+                      quantity: selectedAmount,
+                      variant: selectedVariant,
+                      color: selectedColor
+                    })                
+                  
+                  }}
+                >
+                  <span class="material-icons-round">add_shopping_cart</span>
+                  Add to cart
+                </Button>
+
+                <Button className="w-12 rounded-lg" variant="outline">
+                  <span class="material-icons-round">favorite</span>
+                </Button>
               </div>
-              <BButton additionalStyles="w-full">Buy it now</BButton>
+              <Button className="w-full">Buy it now</Button>
             </div>
           </div>
         </div>
@@ -145,17 +191,19 @@ export default function Product({ params }) {
           </Table>
         </div>
       </div>
-      <div class='px-20 pb-5'>
-      <Accordion type="single" collapsible>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Materials</AccordionTrigger>
-    <AccordionContent>
-    {item.materials.map((material, index) => (
-  index === item.materials.length - 1 ? material : material + ", "
-))}
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
+      <div class="px-20 pb-5">
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Materials</AccordionTrigger>
+            <AccordionContent>
+              {item.materials.map((material, index) =>
+                index === item.materials.length - 1
+                  ? material
+                  : material + ", ",
+              )}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </>
   );

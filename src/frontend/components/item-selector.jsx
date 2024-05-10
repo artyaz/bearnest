@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-export default function ItemSelector({ options, type }) {
+export default function ItemSelector({ options, type, onChange }) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelect = option => {
     setSelectedOption(option);
+    onChange(option);
   };
 
   const colorClasses = {
