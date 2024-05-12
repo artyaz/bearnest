@@ -13,12 +13,28 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { BButton } from "./bearnest-button";
 import { VerticalSpacer } from "./vertical-spacer";
-import { BNavigationDropDown } from "./bearnest-dropdown-menu";
+import { BNavigationDropDown } from "./navbar-dropdown";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/utils/supabase";
 
 const components = [
   {
@@ -45,7 +61,7 @@ const components = [
   },
 ];
 
-export function NavigationBar() {
+export function NavigationBar({ user, name }) {
   const [searchTerm, setSearchTerm] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,6 +69,9 @@ export function NavigationBar() {
     const searchUrl = `/search/title=${formattedTerm}`;
     window.location.href = searchUrl;
   };
+
+  console.log("user data");
+  console.log(user);
 
   return (
     <NavigationMenu class="w-full">
@@ -128,15 +147,69 @@ export function NavigationBar() {
           </form>
         </NavigationMenuItem>
         <NavigationMenuItem class="hidden laptop:block">
-          <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Log in
-            </NavigationMenuLink>
-          </Link>
+          {user.user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Dashboard
+                </NavigationMenuLink>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuItem>
+                  <Link href="/create" legacyBehavior passHref>
+                    Create entry
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/entries" legacyBehavior passHref>
+                    Manage entries
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/logout" legacyBehavior passHref>
+                    Log out
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link href="/login" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Log in
+              </NavigationMenuLink>
+            </Link>
+          )}
         </NavigationMenuItem>
         <div class="flex space-x-2">
           <div class="laptop:hidden">
-            <BNavigationDropDown />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button class="flex max-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gray-200 bg-white p-2 text-black hover:bg-accent">
+                  <span class="material-icons-round !text-[20px]">menu</span>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>Categories</DropdownMenuLabel>
+                <DropdownMenuGroup>
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>Furniture</DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent>
+                        <DropdownMenuItem>Living Room</DropdownMenuItem>
+                        <DropdownMenuItem>Dining Room</DropdownMenuItem>
+                        <DropdownMenuItem>Bedroom</DropdownMenuItem>
+                        <DropdownMenuItem>Home Office</DropdownMenuItem>
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
+                  <DropdownMenuItem>Lightning & Accesories</DropdownMenuItem>
+                  <DropdownMenuItem>Outdoor</DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Account</DropdownMenuLabel>
+                <DropdownMenuItem>Log in</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           <BButton variant="white" type="rounded" icon="shopping_cart" />
           <BButton variant="white" type="rounded" icon="favorite" />

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { columns } from "./data";
 import { DataTable } from "./data-table";
+import { verifyLogin } from '@/utils/auth';
 import {
   Card,
   CardContent,
@@ -13,10 +14,15 @@ import {
 import FurnitureItem from "@/models/furniture-item";
 
 export default function Entries() {
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    async function checkAuth() {
+      const { userData, error } = await verifyLogin();
+      console.log(userData, error);
+    }
+    checkAuth();
+
     async function getData() {
       try {
         const furnitureItems = await FurnitureItem.fetchLimitedData();

@@ -134,8 +134,8 @@ const [selectedColor, setSelectedColor] = useState(null);
                     addToCart({
                       id: item.id,
                       image: item.images[0],
-                      totalPrice: item.price * selectedAmount,
-                      pricePerItem: item.price,
+                      'totalPrice': item.price * selectedAmount,
+                      price: item.price,
                       name: item.title,
                       quantity: selectedAmount,
                       variant: selectedVariant,

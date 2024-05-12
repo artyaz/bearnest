@@ -17,7 +17,7 @@ export function AmountInput({value, onChange}) {
     };
 
     return (
-        <div className='bg-white border border-1 border-zync-200 rounded-lg max-w-fit flex items-center justify-center px-2'>
+        <div className='bg-white border border-1 border-zync-200 rounded-lg max-w-fit min-h-10 flex items-center justify-center px-2'>
             <button className="flex items-center justify-center" onClick={decrementValue}>
                 <span className="material-icons-round">remove</span>
             </button>
