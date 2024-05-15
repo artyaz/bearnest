@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 // Constants
 const ITEMS_PER_PAGE = 5;
 
-export function ProductFlexView({ title, textFilter }) {
+export function ProductFlexView({ title, textFilter, categoryFilter, gtFilter, ltFilter, wFilter }) {
   const default_filters = {
     category: ["Chair", "Tablr"],
   };
@@ -71,8 +71,14 @@ export function ProductFlexView({ title, textFilter }) {
       });
 
       const textQuery = `name.imatch.${textFilter},description.imatch.${textFilter}`;
+      const categoryQuery = `category.eq.${categoryFilter}`;
+      console.log('category filter:');
+      console.log(categoryFilter);
       if (textFilter) {
         query = query.or(textQuery);
+      }
+      if (categoryFilter) {
+        query = query.or(categoryQuery);
       }
 
       try {
@@ -122,13 +128,18 @@ export function ProductFlexView({ title, textFilter }) {
         filter_data={availableFilters}
         onFilterChange={handleFilterChange}
       />
+      {title ? (<h1 class='font-e-ukraine text-2xl ml-10'>{title}</h1>) : (<></>)}
       <div className="grid grid-cols-5 grid-rows-none gap-y-6 p-10">
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          paginatedIds.map((id) => <ProductCard key={id.id} id={id.id} />)
-        )}
-      </div>
+  {isLoading ? (
+    <p>Loading...</p>
+  ) : (
+    paginatedIds.length > 0 ? (
+      paginatedIds.map((id) => <ProductCard key={id.id} id={id.id} />)
+    ) : (
+      <h1>There are currently no products with selected filters :(</h1>
+    )
+  )}
+</div>
       <div class="mb-10 flex justify-center">
         <BearnestPagination
           pages={totalPages}

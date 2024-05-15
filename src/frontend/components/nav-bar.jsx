@@ -35,28 +35,29 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/utils/supabase";
+import { buttonVariants } from "@/components/ui/button";
 
 const components = [
   {
     title: "Living Room",
-    href: "/docs/primitives/alert-dialog",
+    href: "/search/category=Living Room&pageTitle=Living Room",
     description: "Coffee & Side tables, Shelving, Storage, Sofas & Armchairs.",
   },
   {
     title: "Dining Room",
-    href: "/docs/primitives/hover-card",
+    href: "/search/category=Dining Room&pageTitle=Dining Room",
     description:
       "Counter & Bar Stools, Dining Benches, Dining Chairs, Dining Tables",
   },
   {
     title: "Bedroom",
-    href: "/docs/primitives/progress",
+    href: "/search/category=Bedroom&pageTitle=Bedroom",
     description:
       "Dining Tables, Beds, Bedside Tables, Chest of Drawers, Dressing Table",
   },
   {
     title: "Home Office",
-    href: "/docs/primitives/scroll-area",
+    href: "/search/category=Home Office&pageTitle=Home Office",
     description: "Desks, Office Chairs",
   },
 ];
@@ -114,14 +115,22 @@ export function NavigationBar({ user, name }) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
+            <Link
+              href="/search/category=Accesories&pageTitle=Lightning and Accesories"
+              legacyBehavior
+              passHref
+            >
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Lightning & Accesories
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
+            <Link
+              href="/search/category=Outdoor&pageTitle=Outdoor"
+              legacyBehavior
+              passHref
+            >
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Outdoor
               </NavigationMenuLink>
@@ -155,7 +164,9 @@ export function NavigationBar({ user, name }) {
                 </NavigationMenuLink>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
-                <DropdownMenuItem>
+                {user.user.app_metadata.userrole == 'root_admin' ? (
+                  <>
+                  <DropdownMenuItem>
                   <Link href="/create" legacyBehavior passHref>
                     Create entry
                   </Link>
@@ -165,6 +176,9 @@ export function NavigationBar({ user, name }) {
                     Manage entries
                   </Link>
                 </DropdownMenuItem>
+                </>
+                ) : (undefined)}
+                
                 <DropdownMenuItem>
                   <Link href="/logout" legacyBehavior passHref>
                     Log out
@@ -211,8 +225,27 @@ export function NavigationBar({ user, name }) {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <BButton variant="white" type="rounded" icon="shopping_cart" />
-          <BButton variant="white" type="rounded" icon="favorite" />
+          <Button variant="outline" className="rounded-full">
+            <Link
+              href="/cart"
+              className="inline-block h-full w-full text-center no-underline"
+            >
+              <span className="material-icons-round align-middle">
+                shopping_cart
+              </span>
+            </Link>
+          </Button>
+
+          <Button variant="outline" className="rounded-full">
+            <Link
+              href="/favorites"
+              className="inline-block h-full w-full text-center no-underline"
+            >
+              <span className="material-icons-round align-middle">
+                favorite
+              </span>
+            </Link>
+          </Button>
         </div>
       </NavigationMenuList>
     </NavigationMenu>

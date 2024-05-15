@@ -11,10 +11,12 @@ export default function Search({ params }) {
         acc[key] = value;
         return acc;
     }, {});
+    console.log('search params');
+    console.log(searchParams);
     return(
         <>
         
-        <ProductFlexView textFilter={searchParams.title} />
+        <ProductFlexView textFilter={searchParams.title} categoryFilter={searchParams.category} title={searchParams.pageTitle} />
         </>
     )
 }
