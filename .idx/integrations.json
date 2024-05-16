@@ -1,0 +1,10 @@
+{
+  "firebase_hosting": {},
+  "cloud_run_deploy": {
+    "lastDeployment": {
+      "region": "europe-central2",
+      "url": "https://idx-bearnest-5015030-x3okdw766a-lm.a.run.app",
+      "serviceName": "idx-bearnest-5015030"
+    }
+  }
+}
