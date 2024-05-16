@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "start": "react-env --path ../../../.env -- next dev",
+    "start": "react-env --path /.env -- next dev",
 "build": "next build",
 "export": "next export",
-"start:prod": "react-env --path ../../../.env -- next start",
+"start:prod": "react-env --path /.env -- next start",
 "test": "jest"
   },
   "dependencies": {
